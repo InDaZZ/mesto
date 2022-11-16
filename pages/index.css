@@ -15,8 +15,8 @@
 @import url(../blocks/elements/elment/__text/elemnt__text.css);
 @import url(../blocks/elements/elment/__image/element__image.css);
 @import url(../blocks/elements/elment/__like/elemnt__like.css);
-@import url();
-@import url();
+@import url(../footer/footer.css);
+@import url(../footer/__copywriting/footer__copywriting.css);
 @import url();
 @import url();
 @import url();
