@@ -3,3 +3,16 @@
     margin: auto;
     padding-top: 45px;
 }
+
+@media screen and (max-width: 950px) {
+    .header {
+        max-width: 620px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .header {
+        max-width: 320px;
+        padding-top: 28px;
+    }
+}

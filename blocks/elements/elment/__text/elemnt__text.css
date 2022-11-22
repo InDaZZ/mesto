@@ -7,4 +7,7 @@
     color: #000000;
     padding: 25px 0 31px 21px;
     margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
