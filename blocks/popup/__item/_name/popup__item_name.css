@@ -1,9 +1,9 @@
 .popup__item_name {
-    padding: 54px 0 13px 0;
+  padding: 54px 0 13px 0;
 }
 
 @media screen and (max-width: 650px) {
-    .popup__item_name {
-        padding-top: 75px;
-    }
+  .popup__item_name {
+    padding-top: 75px;
+  }
 }

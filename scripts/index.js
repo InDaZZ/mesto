@@ -9,29 +9,29 @@ let popupActivity = document.querySelector('.popup__item_activity');
 let formElement = document.querySelector('.form');
 
 function popupActive() {
-    popup.classList.add('popup_active')
-    popupName.value = profileNameText.textContent;
-    popupActivity.value = activity.textContent;
+  popup.classList.add('popup_active')
+  popupName.value = profileNameText.textContent;
+  popupActivity.value = activity.textContent;
 }
 
-function formSubmitHandler (evt) {
-    evt.preventDefault();
-    popupName.getAttribute('value');
-    popupActivity.getAttribute('value');
-    profileNameText.textContent = popupName.value;
-    activity.textContent = popupActivity.value;
-    popup.classList.remove('popup_active')
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  popupName.getAttribute('value');
+  popupActivity.getAttribute('value');
+  profileNameText.textContent = popupName.value;
+  activity.textContent = popupActivity.value;
+  popup.classList.remove('popup_active')
 }
 
 function popupClose() {
-    popup.classList.remove('popup_active')
+  popup.classList.remove('popup_active')
 }
 
-editButton.addEventListener ('click', popupActive);
+editButton.addEventListener('click', popupActive);
 
 formElement.addEventListener('submit', formSubmitHandler);
 
-popupCloseButton.addEventListener ('click', popupClose);
+popupCloseButton.addEventListener('click', popupClose);
 
 
 
@@ -40,5 +40,5 @@ popupCloseButton.addEventListener ('click', popupClose);
 
 
 
- 
+
 

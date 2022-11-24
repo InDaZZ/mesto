@@ -1,25 +1,25 @@
 .elements {
-    display: grid;
-    max-width: 880px;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 20px 17px;
-    margin: 75px auto 0;
+  display: grid;
+  max-width: 880px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px 17px;
+  margin: 75px auto 0;
 }
 
 @media screen and (max-width: 950px) {
-    .elements {
-        max-width: 620px;
-        box-sizing: border-box;
-        gap: 20px 10px;
-    }
+  .elements {
+    max-width: 620px;
+    box-sizing: border-box;
+    gap: 20px 10px;
+  }
 }
 
 @media screen and (max-width: 650px) {
-    .elements {
-        max-width: 282px;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 20px 0;
-    }
+  .elements {
+    max-width: 282px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 20px 0;
+  }
 }
