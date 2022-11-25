@@ -7,7 +7,6 @@
   border: 0;
   position: relative;
   top: 15px;
-  margin-left: 18px;
   background-image: url(../../../images/Edit-Button.svg);
 }
 
@@ -20,6 +19,5 @@
   .profile__edit-button {
     max-width: 18px;
     top: 8px;
-    margin-left: 10px;
   }
 }

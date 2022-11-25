@@ -4,9 +4,9 @@ let popup = document.querySelector('.popup');
 let profileNameText = document.querySelector('.profile__name');
 let activity = document.querySelector('.profile__activity');
 let popupBotton = document.querySelector('.popup__botton');
-let popupName = document.querySelector('.popup__item_name');
-let popupActivity = document.querySelector('.popup__item_activity');
-let formElement = document.querySelector('.form');
+let popupName = document.querySelector('.popup_type_name');
+let popupActivity = document.querySelector('.popup_type_activity');
+let formElement = document.querySelector('.popup__form');
 
 function popupActive() {
   popup.classList.add('popup_active')
@@ -16,8 +16,6 @@ function popupActive() {
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  popupName.getAttribute('value');
-  popupActivity.getAttribute('value');
   profileNameText.textContent = popupName.value;
   activity.textContent = popupActivity.value;
   popup.classList.remove('popup_active')

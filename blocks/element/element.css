@@ -4,12 +4,6 @@
   max-width: 282px;
 }
 
-@media screen and (max-width: 950px) {
-  .element {
-    max-width: 200px;
-  }
-}
-
 @media screen and (max-width: 650px) {
   .element {
     max-width: 282px;
