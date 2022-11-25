@@ -4,8 +4,8 @@ let popup = document.querySelector('.popup');
 let profileNameText = document.querySelector('.profile__name');
 let activity = document.querySelector('.profile__activity');
 let popupBotton = document.querySelector('.popup__botton');
-let popupName = document.querySelector('.popup_type_name');
-let popupActivity = document.querySelector('.popup_type_activity');
+let popupName = document.querySelector('.popup__item_type_name');
+let popupActivity = document.querySelector('.popup__item_type_activity');
 let formElement = document.querySelector('.popup__form');
 
 function popupActive() {
