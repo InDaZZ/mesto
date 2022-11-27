@@ -1,4 +1,4 @@
-.popup__botton {
+.popup__button {
   background: #000000;
   width: 100%;
   color: #FFFFFF;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 650px) {
-  .popup__botton {
+  .popup__button {
     font-size: 14px;
     line-height: 17px;
     max-width: 238px;
