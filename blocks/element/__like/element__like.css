@@ -10,8 +10,7 @@
   margin: 30px 20px 30px 0;
 }
 
-.elemnt__like:hover {
+.element__like:hover {
   opacity: 0.5;
-  transition: 0.3s;
   cursor: pointer;
 }

@@ -23,48 +23,6 @@
       <button type="button" class="profile__add-button"></button>
     </section>
     <section class="elements">
-      <div class="element">
-        <img src="./images/Karachevsk.jpg" alt="Карачаевск-фото" class="element__image">
-        <div class="element__content">
-          <h2 class="element__text">Карачаевск</h2>
-          <button type="button" class="element__like"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/Elbrus.png" alt="Гора Эльбрус-фото" class="element__image">
-        <div class="element__content">
-          <h2 class="element__text">Гора Эльбрус</h2>
-          <button type="button" class="element__like"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/Dombai.png" alt="Домбай-фото" class="element__image">
-        <div class="element__content">
-          <h2 class="element__text">Домбай</h2>
-          <button type="button" class="element__like"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/Elbrus.png" alt="Гора Эльбрус-фото" class="element__image">
-        <div class="element__content">
-          <h2 class="element__text">Гора Эльбрус</h2>
-          <button type="button" class="element__like"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/Dombai.png" alt="Домбай-фото" class="element__image">
-        <div class="element__content">
-          <h2 class="element__text">Домбай</h2>
-          <button type="button" class="element__like"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/Karachevsk.jpg" alt="Карачаево-фото" class="element__image">
-        <div class="element__content">
-          <h2 class="element__text">Карачаево-Ч...</h2>
-          <button type="button" class="element__like"></button>
-        </div>
-      </div>
     </section>
     <div class="popup">
       <div class="popup__container">
@@ -79,10 +37,40 @@
         <button type="button" class="popup__button-close"></button>
       </div>
     </div>
+    <div class="popup" id="popupCard">
+      <div class="popup__container">
+        <form class="popup__form" name="addCard" id="popupFormCard">
+          <h2 class="popup__heading">Новое место</h2>
+          <input type="text" class="popup__item popup__item_type_card-name" placeholder="Название" name="pictureName" id="pictureName"
+            value="">
+          <input type="text" class="popup__item popup__item_type_card-link" placeholder="Ссылка на картинку" name="pictureLink" id="pictureLink"
+            value="">
+          <button type="submit" class="popup__button" id="popupButtonCard">Сохранить</button>
+        </form>
+        <button type="button" class="popup__button-close" id="popupCardButtonClose"></button>
+      </div>
+    </div>
+    <div class="popup" id="popupImage">
+      <div class="popup__image-container">
+        <img src="#" alt="" class="popup__image">
+        <button type="button" class="popup__button-close popup__button-close_image" id="popupImageButtonClose"></button>
+        <h3 class="popup__image-title">adasdasdasdasd</h3>
+      </div>
+    </div>
   </main>
   <footer class="footer">
     <p class="footer__copywriting">© 2020 Mesto Russia</p>
   </footer>
+<template id="element-template">
+    <div class="element">
+      <img src="" alt="" class="element__image">
+      <div class="element__content">
+        <h2 class="element__text"></h2>
+        <button type="button" class="element__like"></button>
+        <button type="button" class="element__delete"></button>
+      </div>
+    </div>
+</template>
   <script defer src="./scripts/index.js	"></script>
 </body>
 
