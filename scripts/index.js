@@ -2,27 +2,27 @@ const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-    alt:  'Архыз-Фото'
+    alt: 'Архыз-Фото'
   },
   {
     name: 'Челябинская область-Фото',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-    alt:  'Челябинская область-Фото'
+    alt: 'Челябинская область-Фото'
   },
   {
     name: 'Иваново',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-    alt:   'Иваново-Фото'
+    alt: 'Иваново-Фото'
   },
   {
     name: 'Камчатка',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-    alt:   'Камчатка-Фото'
+    alt: 'Камчатка-Фото'
   },
   {
     name: 'Холмогорский район',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-    alt:   'Холмогорский район-Фото'
+    alt: 'Холмогорский район-Фото'
   },
   {
     name: 'Байкал',
@@ -31,22 +31,10 @@ const initialCards = [
   }
 ];
 
-initialCards.forEach(item => {
-  const elements = document.querySelector('.elements');
-  const elementTamplate = document.querySelector('#element-template').content;
-  elementTamplate.querySelector('.element__image').src = item.link;
-  elementTamplate.querySelector('.element__image').alt = item.alt;
-  elementTamplate.querySelector('.element__text').textContent = item.name;
-  const element = elementTamplate.querySelector('.element').cloneNode(true);
-  elements.append(element);
-  element.querySelector('.element__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like_active');
-  });
-});
+
 
 const editButton = document.querySelector('.profile__edit-button');
-let popupCloseButton = document.querySelector('.popup__button-close');
-const popupCloseButtonNode = document.querySelectorAll('.popup__button-close');
+const popupCloseButton = document.querySelectorAll('.popup__button-close');
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('#popupProfile');
 const profileNameText = document.querySelector('.profile__name');
@@ -64,15 +52,25 @@ const popupFormCard = document.querySelector('#popupFormCard');
 const deleteBotton = document.querySelectorAll('.element__delete');
 let elementTamplate = document.querySelector('#element-template');
 const elements = document.querySelector('.elements');
+let elementImageTamplate = elementTamplate.content.querySelector('.element__image');
+let elementTextTamplate = elementTamplate.content.querySelector('.element__text');
+let elementDeleteTamplate = elementTamplate.content.querySelector('.element__delete');
+let elementLikeTamplate = elementTamplate.content.querySelector('.element__like');
 let element = document.querySelectorAll('.element');
 const elementText = document.querySelectorAll('.element__text');
 const elementLike = elements.querySelector('.element__like');
 const popupImage = document.querySelector('#popupImage');
-const elementImage = document.querySelector('.element__image');
-const elementImageAll = document.getElementsByClassName('element__image');
 const popupElementImg = document.querySelector('.popup__image');
-const popupImageButtonClose = document.querySelector('#popupImageButtonClose');
 const popupImageTitle = document.querySelector('.popup__image-title');
+
+
+initialCards.forEach(item => {
+  elements.append(createCardNew(item.link, item.alt,item.name ))
+});
+
+function Like (evt) {
+  evt.target.classList.toggle('element__like_active');
+};
 
 
 function popupActive(evt) {
@@ -99,7 +97,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_active');
 };
 
-popupCloseButtonNode.forEach(button => {
+popupCloseButton.forEach(button => {
   const popupClose = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popupClose));
 });
@@ -115,26 +113,28 @@ function popupCardActive() {
   popupCard.classList.add('popup_active');
 }
 
+function createCard(Item) {
 
-function createCardNew() {
-  elementTamplate = document.querySelector('#element-template').content;
-  elementTamplate.querySelector('.element__image').src = popupCardLink.value;
-  elementTamplate.querySelector('.element__image').alt = 'Изображение добавленное пользователем'
-  elementTamplate.querySelector('.element__text').textContent = popupCardName.value;
-  element = elementTamplate.querySelector('.element').cloneNode(true);
-  element.querySelector('.element__image').addEventListener('click', popupActive)
-  element.querySelector('.element__delete').addEventListener('click', deleteClick)
-  element.querySelector('.element__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like_active');
-  });
-  return element
+}
+
+
+function createCardNew(imageCardvalue, imageCardalt, imageCardtext) {
+  elementTamplate.content;
+  elementImageTamplate.src = imageCardvalue;
+  elementImageTamplate.alt = imageCardalt;
+  elementTextTamplate.textContent = imageCardtext;
+  const cloneElement = elementTamplate.content.cloneNode(true);
+  cloneElement.querySelector('.element__like').addEventListener('click', Like)
+  cloneElement.querySelector('.element__delete').addEventListener('click', deleteClick)
+  cloneElement.querySelector('.element__image').addEventListener('click', popupActive)
+  return cloneElement
 };
 
 
 
 function addNewCard(evt) {
   evt.preventDefault();
-  elements.prepend(createCardNew());
+  elements.prepend(createCardNew(popupCardLink.value ,'Изображение добавленное пользователем' , popupCardName.value));
 
   popupCardName.value = '';
 
@@ -144,8 +144,7 @@ function addNewCard(evt) {
 }
 
 function deleteClick(evt) {
-  currentButton = evt.target;
-  currentButton.closest('.element').remove();
+  evt.target.closest('.element').remove();
 }
 
 formElement.addEventListener('submit', saveEditsProfile);
@@ -156,15 +155,6 @@ editButton.addEventListener('click', popupActive);
 
 popupFormCard.addEventListener('submit', addNewCard);
 
-let arrImageAll = Array.from(elementImageAll,);
-
-arrImageAll.forEach(item => {
-  item.addEventListener('click', popupActive);
-})
-
-deleteBotton.forEach(item => {
-  item.addEventListener('click', deleteClick)
-})
 
 
 
