@@ -49,14 +49,12 @@ const popupCardName = document.querySelector('.popup__item_type_card-name');
 const popupCardLink = document.querySelector('.popup__item_type_card-link');
 const popupButtonCard = document.querySelector('#popupButtonCard');
 const popupFormCard = document.querySelector('#popupFormCard');
-const deleteBotton = document.querySelectorAll('.element__delete');
 const elementTamplate = document.querySelector('#element-template');
 const elements = document.querySelector('.elements');
 const elementImageTamplate = elementTamplate.content.querySelector('.element__image');
 const elementTextTamplate = elementTamplate.content.querySelector('.element__text');
 const elementDeleteTamplate = elementTamplate.content.querySelector('.element__delete');
 const elementLikeTamplate = elementTamplate.content.querySelector('.element__like');
-const element = document.querySelectorAll('.element');
 const elementText = document.querySelector('.element__text');
 const elementLike = elements.querySelector('.element__like');
 const popupImage = document.querySelector('#popupImage');
@@ -74,7 +72,7 @@ function pushLike(evt) {
 
 function openPopup(popup) {
   popup.classList.add('popup_active');
-}
+};
 
 
 function activePopup(evt) {
@@ -96,7 +94,7 @@ function activePopup(evt) {
     popupImageTitle.textContent = currentImage.closest('.element').textContent;
     openPopup(popupImage);
   }
-}
+};
 
 function closePopup(popup) {
   popup.classList.remove('popup_active');
@@ -112,7 +110,7 @@ function saveEditsProfile(evt) {
   profileNameText.textContent = popupName.value;
   activity.textContent = popupActivity.value;
   closePopup(popup)
-}
+};
 
 function createCardNew(imageCardvalue, imageCardtext, imageCardalt) {
   elementTamplate.content;
@@ -131,11 +129,11 @@ function addNewCard(evt) {
   elements.prepend(createCardNew(popupCardLink.value, popupCardName.value, popupCardName.value));
   evt.target.reset()
   closePopup(popupCard)
-}
+};
 
 function deleteClick(evt) {
   evt.target.closest('.element').remove();
-}
+};
 
 formElement.addEventListener('submit', saveEditsProfile);
 
