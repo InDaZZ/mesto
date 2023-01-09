@@ -12,7 +12,7 @@
   <header class="header">
     <img src="./images/Logo.png" alt="Логотип" class="header__logo">
   </header>
-  <main>
+  <main class="main">
     <section class="profile">
       <img src="./images/image-profile.jpg" alt="Фото-профиля" class="profile__avatar">
       <div class="profile__info">
@@ -26,12 +26,18 @@
     </section>
     <div class="popup" id="popupProfile">
       <div class="popup__container">
-        <form class="popup__form" name="editProfile">
+        <form class="popup__form" name="editProfile" novalidate>
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <input type="text" class="popup__item popup__item_type_name" placeholder="Имя" name="fullName" id="fullName"
-            value="">
-          <input type="text" class="popup__item popup__item_type_activity" placeholder="О себе" name="activity" id="activity"
-            value="">
+          <label for="fullName" class="popup__field">
+            <input type="text" class="popup__item popup__item_type_name" placeholder="Имя" name="fullName" id="fullName"
+              value="" minlength="2" maxlength="40" required>
+            <span class="fullName-error popup__item_error"></span>
+          </label>
+          <label for="activity" class="popup__field">
+            <input type="text" class="popup__item popup__item_type_activity" placeholder="О себе"
+              name="activity" id="activity" value="" minlength="2" maxlength="200" required>
+            <span class="activity-error popup__item_error"></span>
+          </label>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
         <button type="button" class="popup__button-close"></button>
@@ -39,12 +45,18 @@
     </div>
     <div class="popup" id="popupCard">
       <div class="popup__container">
-        <form class="popup__form" name="addCard" id="popupFormCard">
+        <form class="popup__form" name="addCard" id="popupFormCard" novalidate>
           <h2 class="popup__heading">Новое место</h2>
-          <input type="text" class="popup__item popup__item_type_card-name" placeholder="Название" name="pictureName" id="pictureName"
-            value="">
-          <input type="text" class="popup__item popup__item_type_card-link" placeholder="Ссылка на картинку" name="pictureLink" id="pictureLink"
-            value="">
+          <label for="pictureName" class="popup__field">
+            <input type="text" class="popup__item popup__item_type_card-name" placeholder="Название" name="pictureName"
+              id="pictureName" value="" minlength="2" maxlength="30" required>
+            <span class="pictureName-error popup__item_error"></span>
+          </label>
+          <label for="pictureLink" class="popup__field">
+            <input type="url" class="popup__item popup__item_type_card-link" placeholder="Ссылка на картинку"
+              name="pictureLink" id="pictureLink" value="" required>
+            <span class="pictureLink-error popup__item_error"></span>
+          </label>
           <button type="submit" class="popup__button" id="popupButtonCard">Сохранить</button>
         </form>
         <button type="button" class="popup__button-close" id="popupCardButtonClose"></button>
@@ -61,7 +73,7 @@
   <footer class="footer">
     <p class="footer__copywriting">© 2020 Mesto Russia</p>
   </footer>
-<template id="element-template">
+  <template id="element-template">
     <div class="element">
       <img src="#" alt="" class="element__image">
       <div class="element__content">
@@ -70,7 +82,8 @@
         <button type="button" class="element__delete"></button>
       </div>
     </div>
-</template>
+  </template>
+  <script defer src="./scripts/validate.js"></script>
   <script defer src="./scripts/index.js	"></script>
 </body>
 
