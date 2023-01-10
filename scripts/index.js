@@ -31,11 +31,17 @@ const initialCards = [
   }
 ];
 
-
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__item-type_error',
+  errorClass: 'popup__item_error'
+};
 
 const editButton = document.querySelector('.profile__edit-button');
 const popupCloseButtons = document.querySelectorAll('.popup__button-close');
-const popup = document.querySelector('.popup');
 const popups = document.querySelectorAll('.popup')
 const popupProfile = document.querySelector('#popupProfile');
 const profileNameText = document.querySelector('.profile__name');
@@ -61,20 +67,20 @@ const elementLike = elements.querySelector('.element__like');
 const popupImage = document.querySelector('#popupImage');
 const popupElementImg = document.querySelector('.popup__image');
 const popupImageTitle = document.querySelector('.popup__image-title');
+const keyescape = 'Escape';
+
 
 
 function closePopupEsc(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(popupProfile);
-    closePopup(popupCard);
-    closePopup(popupImage);
-    document.removeEventListener('keydown', closePopupEsc);
+  if (evt.key === keyescape) {
+    const popupOpened = document.querySelector('.popup_active')
+    closePopup(popupOpened);
   }
 }
 function closePoupClick() {
   popups.forEach(popup => {
     popup.addEventListener('click', function (evt) {
-      if (evt.target == popup) {
+      if (evt.target === popup) {
         closePopup(popup);
       }
     })
@@ -93,6 +99,7 @@ function pushLike(evt) {
 
 function openPopup(popup) {
   popup.classList.add('popup_active');
+  document.addEventListener('keydown', closePopupEsc);
 };
 
 
@@ -102,14 +109,10 @@ function activePopup(evt) {
     openPopup(popupProfile);
     popupName.value = profileNameText.textContent;
     popupActivity.value = activity.textContent;
-    document.addEventListener('keydown', closePopupEsc)
-    closePoupClick()
   }
 
   if (evt.target.classList.contains('profile__add-button')) {
     openPopup(popupCard);
-    document.addEventListener('keydown', closePopupEsc);
-    closePoupClick();
   }
 
   if (evt.target.classList.contains('element__image')) {
@@ -118,13 +121,12 @@ function activePopup(evt) {
     popupElementImg.alt = currentImage.getAttribute('alt');
     popupImageTitle.textContent = currentImage.closest('.element').textContent;
     openPopup(popupImage);
-    document.addEventListener('keydown', closePopupEsc);
-    closePoupClick();
   }
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_active');
+  document.removeEventListener('keydown', closePopupEsc);
 };
 
 popupCloseButtons.forEach(button => {
@@ -162,6 +164,8 @@ function deleteClick(evt) {
   evt.target.closest('.element').remove();
 };
 
+closePoupClick();
+
 formElement.addEventListener('submit', saveEditsProfile);
 
 profileAddButton.addEventListener('click', activePopup);
@@ -170,14 +174,6 @@ editButton.addEventListener('click', activePopup);
 
 popupFormCard.addEventListener('submit', addNewCard);
 
-validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__item',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_inactive',
-  inputErrorClass: 'popup__item-type_error',
-  errorClass: 'popup__item_error'
-}
 enableValidation(validationConfig)
 
 
