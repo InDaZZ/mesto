@@ -117,7 +117,7 @@ function openPopupProfile() {
 }
 
 function openPopupImage(evt) {
-  let currentImage = evt.target;
+  const currentImage = evt.target;
   popupElementImg.src = currentImage.getAttribute('src');
   popupElementImg.alt = currentImage.getAttribute('alt');
   popupImageTitle.textContent = currentImage.closest('.element').textContent;
@@ -175,7 +175,7 @@ editButton.addEventListener('click', openPopupProfile);
 
 popupFormCard.addEventListener('submit', addNewCard);
 
-enableValidation(validationConfig)
+enableValidation(validationConfig);
 
 
 
