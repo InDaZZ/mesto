@@ -1,19 +1,14 @@
-import {popupElementImg, popupImageTitle, popupImage} from './index.js';
+
 
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, openPopup) {
     this._templateSelector = templateSelector;
     this._name = data.name;
     this._link = data.link;
-    this._alt = data.alt
+    this._alt = data.alt;
+    this._openPopup = openPopup;
   }
 
-  _openPopupImage () {
-    popupElementImg.src = this._link;
-    popupElementImg.alt = this._alt;
-    popupImageTitle.textContent = this._name;
-    popupImage.classList.add('popup_active');
-  }
 
   _getTemplateSelector () {
     const cardElements = document
@@ -25,27 +20,34 @@ export default class Card {
     return cardElements;
   }
 
+  
+
   _pushLike() {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    this._like.classList.toggle('element__like_active');
   }
 
-  _deleteCardBotton() {
-    this._element.querySelector('.element__delete').closest('.element').remove();
+  _deleteBotton() {
+    this._elementDelete.closest('.element').remove();
   }
   
   _setEventListeners() {
-    this._element = this._getTemplateSelector () ;
-    this._element.querySelector('.element__like').addEventListener('click', () => {this._pushLike()});
-    this._element.querySelector('.element__delete').addEventListener('click', () => {this._deleteCardBotton()});
-    this._element.querySelector('.element__image').addEventListener('click', () => {this._openPopupImage()});
+    
+    this._like.addEventListener('click', () => {this._pushLike()});
+    this._elementDelete.addEventListener('click', () => {this._deleteBotton()});
+    this._image.addEventListener('click', () => {this._openPopup(this._name,this._link,this._alt)});
   }
 
   generateCard() {
     this._element = this._getTemplateSelector() ;
+    this._image = this._element.querySelector('.element__image');
+    this._text = this._element.querySelector('.element__text');
+    this._elementDelete = this._element.querySelector('.element__delete');
+    this._like = this._element.querySelector('.element__like');
+    this._image.src = this._link;
+    this._image.alt = this._alt;
+    this._text.textContent = this._name;
     this._setEventListeners()
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__text').textContent = this._name;
-    this._element.querySelector('.element__image').alt = this._alt; 
+     
     return this._element
   };
 }

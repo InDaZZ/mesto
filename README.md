@@ -8,6 +8,7 @@
 4. Адаптивная, резиновая верстка  
 5. Flex  
 6. Grid  
-7. Js 
+7. Js
+8. ES6 modules, JS Classes 
   
 ## Your site is live at https://indazz.github.io/mesto/
