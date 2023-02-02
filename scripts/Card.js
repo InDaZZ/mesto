@@ -1,5 +1,4 @@
 
-
 export default class Card {
   constructor(data, templateSelector, openPopup) {
     this._templateSelector = templateSelector;
@@ -9,8 +8,7 @@ export default class Card {
     this._openPopup = openPopup;
   }
 
-
-  _getTemplateSelector () {
+  _getTemplateSelector() {
     const cardElements = document
       .querySelector(this._templateSelector)
       .content
@@ -20,8 +18,6 @@ export default class Card {
     return cardElements;
   }
 
-  
-
   _pushLike() {
     this._like.classList.toggle('element__like_active');
   }
@@ -29,16 +25,16 @@ export default class Card {
   _deleteBotton() {
     this._elementDelete.closest('.element').remove();
   }
-  
+
   _setEventListeners() {
-    
-    this._like.addEventListener('click', () => {this._pushLike()});
-    this._elementDelete.addEventListener('click', () => {this._deleteBotton()});
-    this._image.addEventListener('click', () => {this._openPopup(this._name,this._link,this._alt)});
+
+    this._like.addEventListener('click', () => { this._pushLike() });
+    this._elementDelete.addEventListener('click', () => { this._deleteBotton() });
+    this._image.addEventListener('click', () => { this._openPopup(this._name, this._link, this._alt) });
   }
 
   generateCard() {
-    this._element = this._getTemplateSelector() ;
+    this._element = this._getTemplateSelector();
     this._image = this._element.querySelector('.element__image');
     this._text = this._element.querySelector('.element__text');
     this._elementDelete = this._element.querySelector('.element__delete');
@@ -47,11 +43,10 @@ export default class Card {
     this._image.alt = this._alt;
     this._text.textContent = this._name;
     this._setEventListeners()
-     
     return this._element
   };
 }
 
 
 
-  
+

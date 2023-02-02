@@ -56,7 +56,7 @@ const profileNameText = document.querySelector('.profile__name');
 const activity = document.querySelector('.profile__activity');
 const popupName = document.querySelector('.popup__item_type_name');
 const popupActivity = document.querySelector('.popup__item_type_activity');
-const popupForm = document.querySelector('.popup__form');
+const popupProfileForm = document.querySelector('.popup__form');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupCard = document.querySelector('#popupCard');
 const popupCardName = document.querySelector('.popup__item_type_card-name');
@@ -134,7 +134,7 @@ function formdetect(evt) {
   }
   addCardUser(createCardNew(inputData))
   evt.target.reset()
-  popupCardButoonSave.disabled = true;
+  cardValidation.disableSubmitButton();
   popupCardButoonSave.classList.add('popup__button_inactive');
   closePopup(popupCard);
 };
@@ -158,16 +158,16 @@ initialCards.forEach((data) => {
   addCardAuto(createCardNew(data));
 });
 
-function enableFormValidation(formElement) {
-  const validator = new FormValidator(validationConfig, formElement)
-  validator.enableValidation();
-};
 
-enableFormValidation(popupFormProfile);
-enableFormValidation(popupFormCard);
+const ProfileValidation = new FormValidator(validationConfig, popupFormProfile);
 
+ProfileValidation.enableValidation();
 
-popupForm.addEventListener('submit', saveEditProfile);
+const cardValidation = new FormValidator(validationConfig, popupFormCard);
+
+cardValidation.enableValidation();
+
+popupProfileForm.addEventListener('submit', saveEditProfile);
 
 profileAddButton.addEventListener('click', () => openPopup(popupCard));
 
