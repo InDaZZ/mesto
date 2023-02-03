@@ -56,13 +56,13 @@ const profileNameText = document.querySelector('.profile__name');
 const activity = document.querySelector('.profile__activity');
 const popupName = document.querySelector('.popup__item_type_name');
 const popupActivity = document.querySelector('.popup__item_type_activity');
-const popupProfileForm = document.querySelector('.popup__form');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupCard = document.querySelector('#popupCard');
 const popupCardName = document.querySelector('.popup__item_type_card-name');
 const popupCardLink = document.querySelector('.popup__item_type_card-link');
 const popupFormCard = document.querySelector('#popupFormCard');
 const popupFormProfile = document.querySelector('#popupFormProfile');
+const popupProfileForm = popupProfile.querySelector('.popup__form');
 const elementTamplate = document.querySelector('#element-template');
 const elements = document.querySelector('.elements');
 const elementImageTamplate = elementTamplate.content.querySelector('.element__image');
@@ -135,7 +135,6 @@ function formdetect(evt) {
   addCardUser(createCardNew(inputData))
   evt.target.reset()
   cardValidation.disableSubmitButton();
-  popupCardButoonSave.classList.add('popup__button_inactive');
   closePopup(popupCard);
 };
 
