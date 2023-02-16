@@ -32,12 +32,6 @@ export default class Card {
     this._image.addEventListener('click', () => { this._handleCardClick(this._name, this._link, this._alt) });
   }
 
-  /*вызываю функцию открытия поапа handleCardClick(popupCard) {
-    
-    openPoup(poupCard);
-  }
-  */
-
   generateCard() {
     this._element = this._getTemplateSelector();
     this._image = this._element.querySelector('.element__image');
