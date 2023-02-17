@@ -2,11 +2,12 @@ export default class Popup {
   constructor(popup) {
     this._popup = popup;
     this._popupsCloseByClick = this._popupsCloseByClick.bind(this);
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
     this._popup.classList.add('popup_active');
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    document.addEventListener('keydown', this._handleEscClose);
   }
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
