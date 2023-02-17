@@ -45,6 +45,8 @@ addCardAuto.renderItems();
 
 //открытие поапа профиля
 const profilePopup = new PopupWithForm(popupProfile, submitCallBackToProfile);
+profilePopup.setEventListeners();
+
 
 function openProfilePopup() {
   const inputInfo = userInfoClass.getUserInfo();
@@ -73,9 +75,13 @@ const popupAddCard = new PopupWithForm(popupCard, (item) => {
   addNewCard(item);
   cardValidation.disableSubmitButton();
 });
+popupAddCard.setEventListeners();
+
 
 //получаю PopupWithImage для октрытия попапа карточек 
 const popupWithImageClass = new PopupWithImage(popupImage, popupImageTitle, popupElementImg);
+
+popupWithImageClass.setEventListeners();
 
 profileAddButton.addEventListener('click', () => popupAddCard.open());
 
