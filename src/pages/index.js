@@ -97,3 +97,16 @@ ProfileValidation.enableValidation();
 const cardValidation = new FormValidator(validationConfig, popupFormCard);
 
 cardValidation.enableValidation();
+
+function testProfile () {
+  fetch ('https://mesto.nomoreparties.co/v1/cohort-60/cards', {
+    headers: {
+      authorization: '66beb885-0e1f-4be2-b0ab-ce6b91db573c'
+    }
+  })
+  .then(res => res.json())
+  .then((res) => {
+    console.log(res)
+  })
+}
+testProfile ()
