@@ -6,13 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
 </head>
+
 <body class="body">
   <header class="header">
     <img src="<%=require('./images/Logo.png')%>" alt="Логотип" class="header__logo">
   </header>
   <main class="main">
     <section class="profile">
-      <img src="<%=require('./images/image-profile.jpg')%>" alt="Фото-профиля" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="<%=require('./images/image-profile.jpg')%>" alt="Фото-профиля" class="profile__avatar">
+        <img src="<%=require('./images/edit-profile-avatar.png')%>" alt="Иконка-редактирования"
+          class="profile__edit-avatar">
+      </div>
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Куст</h1>
         <button type="button" class="profile__edit-button"></button>
@@ -61,13 +66,42 @@
         <button type="button" class="popup__button-close" id="popupCardButtonClose"></button>
       </div>
     </div>
-    <div class="popup popup_image" id="popupImage">
-      <div class="popup__image-container">
-        <img src="#" alt="" class="popup__image">
-        <button type="button" class="popup__button-close popup__button-close_image" id="popupImageButtonClose"></button>
-        <h3 class="popup__image-title"></h3>
+    
+      <div class="popup popup_image" id="popupImage">
+        <div class="popup__image-container">
+          <img src="#" alt="" class="popup__image">
+          <button type="button" class="popup__button-close popup__button-close_image"
+            id="popupImageButtonClose"></button>
+          <h3 class="popup__image-title"></h3>
+        </div>
       </div>
-    </div>
+      <div class="popup popup_confirm-deletion" id="popupConfirmDeletion">
+        <div class="popup__container popup__container_confirm-deletion">
+          <form class="popup__form">
+            <h2 class="popup__heading">Вы уверены?</h2>
+            <button type="submit" class="popup__button popup__button_confirm-deletion"
+              id="popupConfirmDeletionButton">Да</button>
+            <button type="button" class="popup__button-close popup__button-close_confirm-deletion"
+              id="popupConfirmDeletionButtonClose"></button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_avatar-edit" id="popupEditAvatar">
+        <div class="popup__container popup__container_edit-avatar">
+          <form class="popup__form" id="popupFormAvatar" novalidate>
+            <h2 class="popup__heading">Обновить аватар</h2>
+            <label for="editAvatar" class="popup__field">
+              <input type="url" class="popup__item popup__item_type_card-name" placeholder="Ссылка на картинку"
+                name="link" id="editAvatar" value="" required>
+              <span class="editAvatar-error popup__error"></span>
+            </label>
+            <button type="submit" class="popup__button popup__button_inactive" id="popupButtonEditAvatar">Да</button>
+  
+          </form>
+          <button type="button" class="popup__button-close popup__button-close_edit-avatar"
+            id="popupEditAvatarButtonClose"></button>
+        </div>
+
   </main>
   <footer class="footer">
     <p class="footer__copywriting">© 2020 Mesto Russia</p>
@@ -77,10 +111,14 @@
       <img src="#" alt="" class="element__image" style="color: white;">
       <div class="element__content">
         <h2 class="element__text"></h2>
-        <button type="button" class="element__like"></button>
+        <div class="element__like-container">
+          <button type="button" class="element__like"></button>
+          <div class="element__like-counter"></div>
+        </div>
         <button type="button" class="element__delete"></button>
       </div>
     </div>
   </template>
 </body>
+
 </html>
