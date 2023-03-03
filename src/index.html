@@ -66,42 +66,41 @@
         <button type="button" class="popup__button-close" id="popupCardButtonClose"></button>
       </div>
     </div>
-    
-      <div class="popup popup_image" id="popupImage">
-        <div class="popup__image-container">
-          <img src="#" alt="" class="popup__image">
-          <button type="button" class="popup__button-close popup__button-close_image"
-            id="popupImageButtonClose"></button>
-          <h3 class="popup__image-title"></h3>
-        </div>
-      </div>
-      <div class="popup popup_confirm-deletion" id="popupConfirmDeletion">
-        <div class="popup__container popup__container_confirm-deletion">
-          <form class="popup__form">
-            <h2 class="popup__heading">Вы уверены?</h2>
-            <button type="submit" class="popup__button popup__button_confirm-deletion"
-              id="popupConfirmDeletionButton">Да</button>
-            <button type="button" class="popup__button-close popup__button-close_confirm-deletion"
-              id="popupConfirmDeletionButtonClose"></button>
-          </form>
-        </div>
-      </div>
-      <div class="popup popup_avatar-edit" id="popupEditAvatar">
-        <div class="popup__container popup__container_edit-avatar">
-          <form class="popup__form" id="popupFormAvatar" novalidate>
-            <h2 class="popup__heading">Обновить аватар</h2>
-            <label for="editAvatar" class="popup__field">
-              <input type="url" class="popup__item popup__item_type_card-name" placeholder="Ссылка на картинку"
-                name="link" id="editAvatar" value="" required>
-              <span class="editAvatar-error popup__error"></span>
-            </label>
-            <button type="submit" class="popup__button popup__button_inactive" id="popupButtonEditAvatar">Да</button>
-  
-          </form>
-          <button type="button" class="popup__button-close popup__button-close_edit-avatar"
-            id="popupEditAvatarButtonClose"></button>
-        </div>
 
+    <div class="popup popup_image" id="popupImage">
+      <div class="popup__image-container">
+        <img src="#" alt="" class="popup__image">
+        <button type="button" class="popup__button-close popup__button-close_image" id="popupImageButtonClose"></button>
+        <h3 class="popup__image-title"></h3>
+      </div>
+    </div>
+    <div class="popup popup_confirm-deletion" id="popupConfirmDeletion">
+      <div class="popup__container popup__container_confirm-deletion">
+        <form class="popup__form">
+          <h2 class="popup__heading">Вы уверены?</h2>
+          <button type="submit" class="popup__button popup__button_confirm-deletion"
+            id="popupConfirmDeletionButton">Да</button>
+          <button type="button" class="popup__button-close popup__button-close_confirm-deletion"
+            id="popupConfirmDeletionButtonClose"></button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_avatar-edit" id="popupEditAvatar">
+      <div class="popup__container popup__container_edit-avatar">
+        <form class="popup__form" id="popupFormAvatar" novalidate>
+          <h2 class="popup__heading">Обновить аватар</h2>
+          <label for="editAvatar" class="popup__field">
+            <input type="url" class="popup__item popup__item_type_card-name" placeholder="Ссылка на картинку"
+              name="link" id="editAvatar" value="" required>
+            <span class="editAvatar-error popup__error"></span>
+          </label>
+          <button type="submit" class="popup__button popup__button_inactive" id="popupButtonEditAvatar">Да</button>
+
+        </form>
+        <button type="button" class="popup__button-close popup__button-close_edit-avatar"
+          id="popupEditAvatarButtonClose"></button>
+      </div>
+    </div>
   </main>
   <footer class="footer">
     <p class="footer__copywriting">© 2020 Mesto Russia</p>
