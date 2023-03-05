@@ -2,20 +2,22 @@ import Popup from "./Popup.js";
 
 export default class PopupWithConfirm extends Popup {
 
-  constructor (popup, submitCallBack) {
+  constructor (popup,) {
     super();
     this._popup = popup;
     this.form = this._popup.querySelector('.popup__form');
-    this.submitCallBack = submitCallBack.bind(this);
+    
     this.submitButton = this._popup.querySelector('.popup__button');
   }
 
-  _submitClickk(evt) {
+  _submitClick(evt) {
     evt.preventDefault();
-    
-    this.submitCallBack()
-    
+    this._handleSubmitCallback();
     this.close();
+  }
+
+  submitCallback(callback) {
+    this._handleSubmitCallback = callback;
   }
 
   setButtonText (buttonTexts) {
@@ -25,6 +27,6 @@ export default class PopupWithConfirm extends Popup {
   setEventListeners() {
     super.setEventListeners();
     
-    this.form.addEventListener('submit', this._submitClickk.bind(this))
+    this.form.addEventListener('submit', this._submitClick.bind(this))
   }
 }

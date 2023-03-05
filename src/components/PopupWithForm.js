@@ -1,5 +1,5 @@
 import Popup from "./Popup.js";
-console.log
+
 export default class PopupWithForm extends Popup {
 
   constructor(popup, submitCallBack) {

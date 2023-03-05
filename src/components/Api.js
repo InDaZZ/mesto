@@ -1,53 +1,67 @@
-const hnadleResponse = (res) => {
+const handleResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject(console.log('Error(('))
 };
 
-
 export default class Api {
   constructor({ url, headers }) {
     this.url = url;
     this.headers = headers;
   }
+   
+  handleResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(console.log('Error(('))
+  }
+
+  getUserID () {
+    return fetch(this.url + '/users/me', {
+      headers: this.headers
+    })
+      .then(handleResponse)
+
+  }
 
   postTask({ data }) {
-    return fetch(this.url,
+    return fetch(this.url + '/cards',
       {
         method: 'POST',
         headers: this.headers,
         body: JSON.stringify(data)
       }
     )
-      .then(hnadleResponse)
+      .then(handleResponse)
   };
 
   getTask() {
-    return fetch(this.url, {
+    return fetch(this.url + '/users/me', {
       headers: this.headers
     })
-      .then(hnadleResponse)
+      .then(this.handleResponse)
 
   };
 
   getTaskCards() {
-    return fetch(this.url, {
+    return fetch(this.url + '/cards', {
       headers: this.headers
     })
 
-      .then(hnadleResponse)
+      .then(handleResponse)
   }
 
   patchTaskProfileEditing({ data }) {
-    return fetch(this.url,
+    return fetch(this.url + '/users/me',
       {
         method: 'PATCH',
         headers: this.headers,
         body: JSON.stringify(data)
       }
     )
-      .then(hnadleResponse)
+      .then(handleResponse)
   }
 
   deleteTask(_id) {
@@ -57,7 +71,7 @@ export default class Api {
         headers: this.headers,
       }
     )
-      .then(hnadleResponse)
+      .then(handleResponse)
   }
 
   pushLike(_id) {
@@ -66,7 +80,7 @@ export default class Api {
       headers: this.headers,
 
     })
-      .then(hnadleResponse)
+      .then(handleResponse)
   }
 
   deleteLike(_id) {
@@ -75,7 +89,7 @@ export default class Api {
       headers: this.headers,
 
     })
-      .then(hnadleResponse)
+      .then(handleResponse)
   }
   pathTaskFromAvatar(avatar) {
     return fetch(this.url + '/users/me/avatar',
@@ -85,7 +99,7 @@ export default class Api {
         body: JSON.stringify({ avatar })
       }
     )
-      .then(hnadleResponse)
+      .then(handleResponse)
   }
 }
 

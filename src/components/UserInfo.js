@@ -7,16 +7,16 @@ export default class UserInfo {
   getUserInfo() {
     const userInfo = {};
 
-    userInfo.fullName = this._profileName.textContent;
+    userInfo.name = this._profileName.textContent;
 
-    userInfo.activity = this._activity.textContent;
+    userInfo.about = this._activity.textContent;
 
     return userInfo;
   }
   
     setUserInfo(userInfo) {
-      this._profileName.textContent = userInfo.fullName;
-      this._activity.textContent = userInfo.activity;
+      this._profileName.textContent = userInfo.name;
+      this._activity.textContent = userInfo.about;
     }
 
     setAvatarInfo(newAvatar) {

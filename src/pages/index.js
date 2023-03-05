@@ -25,29 +25,51 @@ import {
   popupAvatarEditForm,
   popupEditAvatar,
   profileAvatar,
-  popupSubmitButton
+  
 } from '../utils/constants.js'
 import Api from '../components/Api.js';
 import { api } from '../components/Api.js';
 import './index.css'
 
-// запрос на получение данных с сервера
-const LoadingProfileFromServer = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-60/users/me', headers: {
-    authorization: '66beb885-0e1f-4be2-b0ab-ce6b91db573c'
-  }
-});
+//колбек для Section
+function renderFromSection (newCard) {
+  addCard.additem(createCard(newCard));
+}
+
+//класс Section вставляющий краточки
+const addCard = new Section({
+   renderer: renderFromSection
+}, '.elements');
+
+//addCardAutos.renderItems();
+//test
+
+//переменная для Id пользователя
+let userId
+
+Promise.all([api.getTask(), api.getTaskCards()])
+
+.then((res) => {
+
+  userId = res[0]._id //id пользователя
+  addCard.renderItems(res[1]) //загрузка и отрисовка катрочек с сервера
+
+})
+
 
 // добавляю полученные данные профиля 
 function profileFromServer() {
 
-  LoadingProfileFromServer.getTask()
-    .then((data) => {
-      profileNameText.textContent = data.name;
-      activity.textContent = data.about;
-      profileAvatar.src = data.avatar;
-    });
+  api.getTask()
 
+    .then((data) => {
+
+      userInfoClass.setUserInfo(data)
+      userInfoClass.setAvatarInfo(data.avatar)
+
+    })
+
+    .catch((error) => console.log(`Ошибка :( ${error})`));
 };
 
 document.addEventListener('DOMContentLoaded', profileFromServer);
@@ -59,8 +81,8 @@ profilePopup.setEventListeners();
 
 function openProfilePopup() {
   const inputInfo = userInfoClass.getUserInfo();
-  popupInputName.value = inputInfo.fullName;
-  popupInputActivity.value = inputInfo.activity;
+  popupInputName.value = inputInfo.name;
+  popupInputActivity.value = inputInfo.about;
   profilePopup.open();
 }
 
@@ -75,78 +97,80 @@ const userInfoClass = new UserInfo({
 //добавляю информацию введнную пользователем
 function submitCallBackToProfile(userInfo) {
   userInfoClass.setUserInfo(userInfo);
-  prodileEditing()
-
+  profileEditing()
 }
 
 //отправляю новые данные профиля на сервер
-function prodileEditing() {
-  const testeditingProf = new Api({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-60/users/me', headers: {
-      authorization: '66beb885-0e1f-4be2-b0ab-ce6b91db573c', 'Content-Type': 'application/json'
-    }
-  });
+function profileEditing() {
 
   profilePopup.setButtonText('Сохранение...');
 
-  testeditingProf.patchTaskProfileEditing({
+  api.patchTaskProfileEditing({
 
     data: {
       name: `${profileNameText.textContent}`,
       about: `${activity.textContent}`,
+
     }
 
   })
+
+    .catch((error) => console.log(`Ошибка :( ${error})`))
+
     .finally(() => {
       profilePopup.setButtonText('Сохранить');
     });
-};
 
-//GET  запрос к серверу(получаю массив с обьектами карточек)
-const cardRenderFromServ = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-60/cards', headers: {
-    authorization: '66beb885-0e1f-4be2-b0ab-ce6b91db573c'
-  }
-});
+};  
+
+//попап подтвержждения
+const popupWitConfirmation = new PopupWithConfirm(PopupConfirmDelete,);
+popupWitConfirmation.setEventListeners();
 
 // функция создания нвой карточки
 function createCard(item) {
-  const card = new Card(item, '343b7f43dc618d5eebea0845', '#element-template', handleCardClick, () => {
-    const poupWithCOnf = new PopupWithConfirm(PopupConfirmDelete, () => {
+  const card = new Card(item, { userID: userId }, '#element-template', handleCardClick, () => {
 
-     
-      poupWithCOnf.setButtonText('Сохранение...')
+    popupWitConfirmation.submitCallback(() => {
+
+      popupWitConfirmation.setButtonText('Сохранение...')
 
       api.deleteTask(item._id)
-     
+
         .then(() => {
           card.deleteCard()
         })
 
-        .finally(() => {
-          poupWithCOnf.setButtonText('да');
-        });
-       
-    })
-    poupWithCOnf.open();
-    poupWithCOnf.setEventListeners();
-  }, (a) => {
+        .catch((error) => console.log(`Ошибка :( ${error})`))
 
-    if (a) {
+        .finally(() => { 
+
+          popupWitConfirmation.setButtonText('да'); 
+
+        }); 
+    })
+
+    popupWitConfirmation.open();
+    
+    
+  }, (likeAlreadyActive) => {
+
+    if (likeAlreadyActive) {
       api.deleteLike(item._id)
         .then((res) => {
           card.deleteLike()
           card.setLikes(res.likes)
         })
-
+        .catch((error) => console.log(`Ошибка :( ${error})`))
     } else {
       api.pushLike(item._id)
         .then((res) => {
           card.pushLike()
           card.setLikes(res.likes)
         })
+        .catch((error) => console.log(`Ошибка :( ${error})`))
     }
-  }
+  },
   );
   const cardElement = card.generateCard();
   return cardElement
@@ -157,45 +181,23 @@ function handleCardClick(title, link, alt) {
   popupWithImageClass.open(title, link, alt);
 };
 
-//рендерю 6 карточек при загрузке страници
-cardRenderFromServ.getTaskCards()
-  .then((res) => {
-    
-
-    const addCardAuto = new Section({
-      data: res, renderer: (item) => {
-
-        addCardAuto.additem(createCard(item));
-
-      }
-    }, '.elements');
-
-    addCardAuto.renderItems();
-  });
-
 // функция вставляющая карточку 
 
-function addCardUser(newCard) {
-  elements.prepend(newCard);
-}
+
 //добавляю новую карточку(отпраляю запрос на сервер с данными инпутов и вставляю новую карточку в разметку)
 function addNewCard(item) {
 
-  const newImageDropToServerr = new Api({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-60/cards ', headers: {
-      authorization: '66beb885-0e1f-4be2-b0ab-ce6b91db573c', 'Content-Type': 'application/json'
-    }
-  });
-
-  newImageDropToServerr.postTask({
+  api.postTask({
     data: {
       name: item.name,
       link: item.link,
     }
   })
     .then((res) => {
-      addCardUser(createCard(res))
-    });
+      addCard.additem(createCard(res))
+    })
+    .catch((error) => console.log(`Ошибка :( ${error})`));
+
 }
 
 //открытие попапа добавления карточки
@@ -205,7 +207,6 @@ const popupAddCard = new PopupWithForm(popupCard, (item) => {
 });
 
 popupAddCard.setEventListeners();
-
 
 //получаю PopupWithImage для октрытия попапа карточек 
 const popupWithImageClass = new PopupWithImage(popupImage, popupImageTitle, popupElementImg);
@@ -218,9 +219,10 @@ const popupAvatarEdit = new PopupWithForm(popupEditAvatar, (avatarData) => {
   api.pathTaskFromAvatar(avatarData.link)
 
     .then((res) => {
-      profileAvatar.src = res.avatar
+      userInfoClass.setAvatarInfo(res.avatar)
     })
 
+    .catch((error) => console.log(`Ошибка :( ${error})`))
     .finally(() => {
       popupAvatarEdit.setButtonText('Сохранить');
     });
