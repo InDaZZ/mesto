@@ -13,7 +13,7 @@ export default class PopupWithConfirm extends Popup {
   _submitClick(evt) {
     evt.preventDefault();
     this._handleSubmitCallback();
-    this.close();
+    
   }
 
   submitCallback(callback) {

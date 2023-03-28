@@ -1,29 +1,14 @@
-const handleResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(console.log('Error(('))
-};
-
 export default class Api {
   constructor({ url, headers }) {
     this.url = url;
     this.headers = headers;
   }
    
-  handleResponse(res) {
+  _handleResponse(res) {
     if (res.ok) {
       return res.json();
     }
     return Promise.reject(console.log('Error(('))
-  }
-
-  getUserID () {
-    return fetch(this.url + '/users/me', {
-      headers: this.headers
-    })
-      .then(handleResponse)
-
   }
 
   postTask({ data }) {
@@ -34,14 +19,14 @@ export default class Api {
         body: JSON.stringify(data)
       }
     )
-      .then(handleResponse)
+      .then(this._handleResponse)
   };
 
-  getTask() {
+  getUserInfo() {
     return fetch(this.url + '/users/me', {
       headers: this.headers
     })
-      .then(this.handleResponse)
+      .then(this._handleResponse)
 
   };
 
@@ -50,7 +35,7 @@ export default class Api {
       headers: this.headers
     })
 
-      .then(handleResponse)
+      .then(this._handleResponse)
   }
 
   patchTaskProfileEditing({ data }) {
@@ -61,7 +46,7 @@ export default class Api {
         body: JSON.stringify(data)
       }
     )
-      .then(handleResponse)
+      .then(this._handleResponse)
   }
 
   deleteTask(_id) {
@@ -71,7 +56,7 @@ export default class Api {
         headers: this.headers,
       }
     )
-      .then(handleResponse)
+      .then(this._handleResponse)
   }
 
   pushLike(_id) {
@@ -80,7 +65,7 @@ export default class Api {
       headers: this.headers,
 
     })
-      .then(handleResponse)
+      .then(this._handleResponse)
   }
 
   deleteLike(_id) {
@@ -89,7 +74,7 @@ export default class Api {
       headers: this.headers,
 
     })
-      .then(handleResponse)
+      .then(this._handleResponse)
   }
   pathTaskFromAvatar(avatar) {
     return fetch(this.url + '/users/me/avatar',
@@ -99,16 +84,11 @@ export default class Api {
         body: JSON.stringify({ avatar })
       }
     )
-      .then(handleResponse)
+      .then(this._handleResponse)
   }
 }
 
-export const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-60',
-  headers: {
-    authorization: '66beb885-0e1f-4be2-b0ab-ce6b91db573c',
-    'Content-Type': 'application/json'
-  }
-});
 
 
+
+  

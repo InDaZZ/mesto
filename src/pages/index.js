@@ -17,7 +17,6 @@ import {
   popupInputActivity,
   popupFormCard,
   popupFormProfile,
-  elements,
   popupImage,
   popupElementImg,
   popupImageTitle,
@@ -28,39 +27,43 @@ import {
   
 } from '../utils/constants.js'
 import Api from '../components/Api.js';
-import { api } from '../components/Api.js';
-import './index.css'
+import './index.css';
 
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-62',
+  headers: {
+    authorization: 'a5cc8f48-b1d5-4939-89bd-28066ec899ee',
+    'Content-Type': 'application/json'
+  }
+});
 //колбек для Section
 function renderFromSection (newCard) {
-  addCard.additem(createCard(newCard));
+  cardsList.additem(createCard(newCard));
 }
 
 //класс Section вставляющий краточки
-const addCard = new Section({
+const cardsList = new Section({
    renderer: renderFromSection
 }, '.elements');
-
-//addCardAutos.renderItems();
-//test
 
 //переменная для Id пользователя
 let userId
 
-Promise.all([api.getTask(), api.getTaskCards()])
+Promise.all([api.getUserInfo(), api.getTaskCards()])
 
 .then((res) => {
-
+  
   userId = res[0]._id //id пользователя
-  addCard.renderItems(res[1]) //загрузка и отрисовка катрочек с сервера
+  cardsList.renderItems(res[1]) //загрузка и отрисовка катрочек с сервера
 
-})
-
+}
+)
+.catch((error) => console.log(`Ошибка :( ${error})`));
 
 // добавляю полученные данные профиля 
 function profileFromServer() {
 
-  api.getTask()
+  api.getUserInfo()
 
     .then((data) => {
 
@@ -114,6 +117,7 @@ function profileEditing() {
     }
 
   })
+    .then(profilePopup.close())  
 
     .catch((error) => console.log(`Ошибка :( ${error})`))
 
@@ -138,7 +142,10 @@ function createCard(item) {
       api.deleteTask(item._id)
 
         .then(() => {
+
           card.deleteCard()
+          popupWitConfirmation.close()
+          
         })
 
         .catch((error) => console.log(`Ошибка :( ${error})`))
@@ -194,7 +201,8 @@ function addNewCard(item) {
     }
   })
     .then((res) => {
-      addCard.additem(createCard(res))
+      cardsList.additem(createCard(res))
+      popupAddCard.close()
     })
     .catch((error) => console.log(`Ошибка :( ${error})`));
 
@@ -212,6 +220,7 @@ popupAddCard.setEventListeners();
 const popupWithImageClass = new PopupWithImage(popupImage, popupImageTitle, popupElementImg);
 
 popupWithImageClass.setEventListeners();
+
 //поап изменения аватара
 const popupAvatarEdit = new PopupWithForm(popupEditAvatar, (avatarData) => {
   popupAvatarEdit.setButtonText('Сохранение...')
@@ -230,17 +239,15 @@ const popupAvatarEdit = new PopupWithForm(popupEditAvatar, (avatarData) => {
 
 profileAddButton.addEventListener('click', () => popupAddCard.open());
 
+const profileValidation = new FormValidator(validationConfig, popupFormProfile);
 
-const ProfileValidation = new FormValidator(validationConfig, popupFormProfile);
-
-ProfileValidation.enableValidation();
+profileValidation.enableValidation();
 
 const cardValidation = new FormValidator(validationConfig, popupFormCard);
 
 cardValidation.enableValidation();
 
 const avatarProfileValidations = new FormValidator(validationConfig, popupAvatarEditForm);
-
 
 popupAvatarEdit.setEventListeners();
 

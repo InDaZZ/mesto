@@ -58,4 +58,4 @@ export const PopupConfirmDelete = document.querySelector('#popupConfirmDeletion'
 export const popupAvatarEditForm = document.querySelector('#popupFormAvatar');
 export const popupEditAvatar = document.querySelector('#popupEditAvatar');
 export const profileAvatar = document.querySelector('.profile__avatar');
-export const popupSubmitButton = document.querySelector('.popup__button')
+export const popupSubmitButton = document.querySelector('.popup__button');
