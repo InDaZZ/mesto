@@ -54,28 +54,15 @@ Promise.all([api.getUserInfo(), api.getTaskCards()])
 .then((res) => {
   
   userId = res[0]._id //id пользователя
+  userInfoClass.setUserInfo(res[0])//имя пользователя с сервера
+  userInfoClass.setAvatarInfo(res[0].avatar)//аватар пользователя с сервера
+
   cardsList.renderItems(res[1]) //загрузка и отрисовка катрочек с сервера
 
 }
 )
 .catch((error) => console.log(`Ошибка :( ${error})`));
 
-// добавляю полученные данные профиля 
-function profileFromServer() {
-
-  api.getUserInfo()
-
-    .then((data) => {
-
-      userInfoClass.setUserInfo(data)
-      userInfoClass.setAvatarInfo(data.avatar)
-
-    })
-
-    .catch((error) => console.log(`Ошибка :( ${error})`));
-};
-
-document.addEventListener('DOMContentLoaded', profileFromServer);
 
 //открытие поапа профиля
 const profilePopup = new PopupWithForm(popupProfile, submitCallBackToProfile);
